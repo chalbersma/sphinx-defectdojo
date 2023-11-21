@@ -10,7 +10,7 @@ Welcome to sphinx-defectdojo's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-      sphinx_example.rst
+   sphinx_example.rst
 
 
 

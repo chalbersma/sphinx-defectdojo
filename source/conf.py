@@ -20,7 +20,7 @@ author = 'Chris Halbersma'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["defectdojo"]
+extensions = ["sphinx_defectdojo"]
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -32,3 +32,7 @@ exclude_patterns = []
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
+
+# Dojo
+dojo_host = os.environ.get("DOJO_HOST")
+dojo_token = os.environ.get("DOJO_TOKEN")
