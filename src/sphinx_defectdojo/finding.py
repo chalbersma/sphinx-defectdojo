@@ -81,7 +81,7 @@ class DojoFinding(ListTable, Directive):
         header_rows = 1
         stub_columns = 0
 
-        col_widths = [5,5,5,10,10,5,5,55]
+        col_widths = [5,5,5,5,5,5,5,65]
 
         if finding is None and testid is None and product_name is None:
             return [self._report(u"No Finding, test or productname given")]
@@ -93,8 +93,6 @@ class DojoFinding(ListTable, Directive):
 
         list_of_findings = self.get_findings(finding=finding, testid=testid, product_name=product_name,
                                              host=host, token=token)
-
-
 
         header_row = list()
 
@@ -114,9 +112,6 @@ class DojoFinding(ListTable, Directive):
 
         table_node = self.build_table_from_list(table_data, col_widths=col_widths, header_rows=1, stub_columns=0)
 
-        print(table_data)
-
-
         return [table_node]
     
     def gen_finding_row(self, this_finding, host=None):
@@ -126,11 +121,12 @@ class DojoFinding(ListTable, Directive):
         for header in self._header_spec.keys():
             hdef = self._header_spec[header]
             fromobj = hdef.get("fromobj", "finding")
-            fromfield = hdef.get("fromobj", header)
+            fromfield = hdef.get("fromfield", header)
 
             if this_finding[fromobj].data is None:
                 this_data = "None"
             elif fromfield not in this_finding[fromobj].data.keys() and hdef.get("template", None) is None:
+                print("missing {} {}".format(fromobj, fromfield))
                 this_data = "None"
             elif hdef.get("template", None) is not None:
                 this_data = hdef["template"].safe_substitute(**this_finding[fromobj].data, host=host)
@@ -142,7 +138,7 @@ class DojoFinding(ListTable, Directive):
             document = utils.new_document("", default_settings)
             parser = Parser()
 
-            parser.parse(this_data, document)
+            parser.parse(str(this_data), document)
 
             n = document.traverse()[1]
 

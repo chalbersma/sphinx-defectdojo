@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sphinx-defectdojo"
-version = "2023.11.20.2"
+version = "2023.11.20.4"
 authors = [
     {name = "Chris Halbersma", email = "chalbersma@auditboard.com"},
 ]
